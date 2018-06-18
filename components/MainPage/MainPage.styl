@@ -1,0 +1,28 @@
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+    box-sizing: border-box;
+    outline: none;
+  }
+  body
+    overflow: hidden;
+    overflow-y: auto;
+  .isPlaylist
+    .Player
+      transform translateX(-30vw)
+    .MainPage-transformer
+      transform translateX(-30vw)
+    .Player-arrow
+      transition: 0.5s;
+      transform translateX(50%) rotate(90deg)
+      g:not(:first-child)
+        path
+          fill #ffc300
+  .isPlayer
+    .MainPage-transformer
+      transform: translateX(0);
+  .MainPage
+    &-transformer
+      transition 0.5s

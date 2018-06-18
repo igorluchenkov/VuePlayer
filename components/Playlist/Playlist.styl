@@ -1,0 +1,95 @@
+.Playlist
+	min-height 100vh
+	width 50vw
+	margin-left 80vw
+	background-color #ff5733
+	padding 30px 40px 110px
+	counter-reset section
+	&-title
+		color #ffffff
+		font-size 25px
+		margin-bottom 20px
+	&-input
+		width 100%
+		font-size 20px
+		padding 14px 20px
+		border-radius 6px
+		border none
+		&:active, &:focus
+			&::-webkit-input-placeholder {color:transparent;}
+			&::-moz-placeholder          {color:transparent;}
+			&:-moz-placeholder           {color:transparent;}
+			&:-ms-input-placeholder      {color:transparent;}
+	&-item
+		&__value
+			padding 12px 15px 12px 70px
+			overflow hidden
+			white-space nowrap
+			text-overflow ellipsis
+			flex 1
+			transition 0.2s
+			cursor pointer
+			&:after
+				content: '';
+				width: 10px;
+				height: 10px;
+				position: absolute;
+				left: 39px;
+				z-index 1
+				border-radius: 100px;
+				top: 50%;
+				background-color: red;
+				transform: TranslateY(-50%);
+				transition 0.2s
+			&-active
+				padding-left 90px
+				&:after
+					left 67px
+			&:hover
+				padding-right 35px
+				padding-left 90px
+		&__cross
+			margin-right 8px
+			padding 12px 10px 12px 18px
+			border-left 1px solid #ff5733
+			height 100%
+			cursor pointer
+			flex 0 44px
+			user-select none
+			svg,path
+				transition 0.2s
+			&:hover
+				svg
+					transform scale(1.5)
+				path 
+					fill #ff5733
+	ul
+		margin 30px 0
+	li
+		list-style none
+		font-size 20px
+		background #fff
+		border-radius 6px
+		margin-bottom 10px
+		position relative
+		display flex
+		justify-content space-between
+		align-items center
+		overflow hidden
+		&:last-child
+			margin-bottom 0
+		&:before
+			pointer-events none
+			counter-increment section
+			content counter(section)
+			width 51px
+			position absolute
+			left 0px
+			top 0
+			display flex
+			align-items center
+			justify-content center
+			border-right 1px solid #ff5733
+			height 100%
+			background-color #ffffff
+			z-index 2
