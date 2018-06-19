@@ -1,4 +1,6 @@
-import store from '@/store'
+import store from '@/store';
+import YTParser from '../../add_functions/YTParser.js';
+
 
 export default {
   name: 'Player',
@@ -14,7 +16,7 @@ export default {
           const currentIndex = store.state.userSettings.currentItem;
           const currentVideo = store.state.userPlaylist[currentIndex].url;
     
-          player.loadVideoById(this.YTParser(currentVideo));
+          player.loadVideoById(YTParser(currentVideo));
           player.playVideo();
         }
       }
@@ -36,8 +38,13 @@ export default {
       player = new YT.Player('player', {
         width: '1228',
         height: '693',
-        controls: 0,
-        disablekb: 1,
+        playerVars: { 
+          controls:0,
+          rel:0,
+          fs:0,
+          showinfo:0,
+          disablekb:1,
+        },
         events: {
           'onReady': context.onPlayerReady,
           'onStateChange': context.onStateChange,
@@ -46,16 +53,11 @@ export default {
     }
   }, 
   methods: {
-    YTParser: function(url){
-      const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-      const match = url.match(regExp);
-      return (match&&match[7].length==11)? match[7] : false;
-    },
     onPlayerReady: function() {
       const currentIndex = store.state.userSettings.currentItem;
       const currentVideo = store.state.userPlaylist[currentIndex].url;
 
-      player.loadVideoById(this.YTParser(currentVideo));
+      player.loadVideoById(YTParser(currentVideo));
       player.playVideo();
 
       this.isPlayerReady = true;

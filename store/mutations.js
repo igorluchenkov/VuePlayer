@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import YTParser from '../add_functions/YTParser.js'
 
 export const UPDATE_INPUT = (state, value) => {
 	Vue.set(state, 'inputValue', value);
@@ -31,9 +32,7 @@ export const GET_VIDEOS_INFO = (state) => {
 	const namelessItems = state.userPlaylist.filter(el => el.name === '');
 	namelessItems.map(el => {
 		// Getting the id
-		const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-		const match = el.url.match(regExp);
-		const id = (match&&match[7].length==11)? match[7] : false;
+		const id = YTParser(el.url);
 
 		// Getting video name and duration
 		fetch(`https://www.googleapis.com/youtube/v3/videos?id=${id}&key=AIzaSyDlLL_DAscuOKLMq6XhLp8hKP6TTSTcjhA&part=snippet,contentDetails`)
