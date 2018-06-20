@@ -60,3 +60,7 @@ export const GET_VIDEOS_INFO = (state) => {
 export const PLAYER_TOGGLE_PLAYING = (state) => {
 	Vue.set(state, 'isPlaying', !state.isPlaying);
 }
+
+export const TOGGLE_LOOP = (state) => {
+	Vue.set(state.userSettings, 'loop', !state.userSettings.loop);
+}

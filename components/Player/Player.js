@@ -59,6 +59,7 @@ export default {
 
       player.loadVideoById(YTParser(currentVideo));
       player.playVideo();
+      player.setVolume(50);
 
       this.isPlayerReady = true;
     },

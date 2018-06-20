@@ -24,8 +24,18 @@
 			</div>
 		</div>
 
-		<div @click="showVolume" class="ProgressBar-btn">
+		<div @click="toggleLoop" 
+			:class="'ProgressBar-btn ' + ( isLoop ? 'ProgressBar-btn-looped' : '')">
+			<img src="@/assets/ProgressBar/loop.svg">
+		</div>
+
+		<div 
+			@click="toggleVolumePanel($event)" 
+			class="ProgressBar-btn">
 			<img src="@/assets/ProgressBar/volume.svg">
+			<div class="ProgressBar-btn__volume">
+				<input @input="changeVolume" type="range">
+			</div>
 		</div>
 
   </div>

@@ -1,10 +1,25 @@
 export const state = {
 	userPlaylist: [
 		{
-			url: 'https://www.youtube.com/watch?v=00LOPp2ZqOI',
+			url: 'https://www.youtube.com/watch?v=i32stT_Tx7c',
 			name: '',
 			duration: '',
 		},
+		{
+			url: 'https://www.youtube.com/watch?v=TxIwZ5Bwe8Y',
+			name: '',
+			duration: '',
+		},
+		{
+			url: 'https://www.youtube.com/watch?v=m4LrW5f4dyc',
+			name: '',
+			duration: '',
+		},
+		{
+			url: 'https://www.youtube.com/watch?v=00LOPp2ZqOI',
+			name: '',
+			duration: '',
+		},		
 		{
 			url: 'https://www.youtube.com/watch?v=L4U7N8LSky8',
 			name: '',

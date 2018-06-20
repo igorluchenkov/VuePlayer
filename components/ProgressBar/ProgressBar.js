@@ -6,6 +6,9 @@ export default {
 		isPaused(){
 			return store.state.isPlaying;
 		},
+		isLoop(){
+			return store.state.userSettings.loop
+		},
 		currentTitle() {
 			const currentIndex = store.state.userSettings.currentItem;
 			const currentVideo = store.state.userPlaylist[currentIndex];
@@ -35,8 +38,22 @@ export default {
 			}
 			store.commit('CHANGE_VIDEO', current)
 		},
-		showVolume(){
-			
+		toggleLoop(){
+			store.commit('TOGGLE_LOOP');
+		},
+		toggleVolumePanel(e){
+			if(e.target.classList.contains('ProgressBar-btn')){
+				e.target.classList.toggle('ProgressBar-btn__volume-active');
+			}
+		},
+		changeVolume(e){
+			this.volume = Math.abs(100 - e.target.value);
+			player.setVolume(this.volume);
+		}
+	},
+	data(){
+		return {
+			volume: 50,
 		}
 	}
 }
