@@ -64,3 +64,7 @@ export const PLAYER_TOGGLE_PLAYING = (state) => {
 export const TOGGLE_LOOP = (state) => {
 	Vue.set(state.userSettings, 'loop', !state.userSettings.loop);
 }
+
+export const CHANGE_VOLUME = (state, value) => {
+	Vue.set(state.userSettings, 'volume', Math.abs(100 - value));
+}

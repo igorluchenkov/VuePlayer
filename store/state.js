@@ -59,7 +59,9 @@ export const state = {
 	userSettings: {
 		currentItem: 0,
 		loop: false,
+		volume: 75,
 	},
+	currentPlayingItem: 0,
 	inputValue: '',
 	isPlaying: true,
 }

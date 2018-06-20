@@ -47,13 +47,13 @@ export default {
 			}
 		},
 		changeVolume(e){
-			this.volume = Math.abs(100 - e.target.value);
-			player.setVolume(this.volume);
-		}
+			store.commit('CHANGE_VOLUME', e.target.value);
+			player.setVolume(store.state.userSettings.volume);
+		},
 	},
 	data(){
 		return {
-			volume: 50,
+			currentVolume: Math.abs(100 - store.state.userSettings.volume)
 		}
 	}
 }

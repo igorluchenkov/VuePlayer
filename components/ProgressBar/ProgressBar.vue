@@ -34,7 +34,7 @@
 			class="ProgressBar-btn">
 			<img src="@/assets/ProgressBar/volume.svg">
 			<div class="ProgressBar-btn__volume">
-				<input @input="changeVolume" type="range">
+				<input @input="changeVolume" v-model="currentVolume" type="range">
 			</div>
 		</div>
 
