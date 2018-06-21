@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import YTParser from '../add_functions/YTParser.js'
+import { YTParser, YTPlayVideo } from '../add_functions/YTFunctions.js';
 
 export const UPDATE_INPUT = (state, value) => {
 	Vue.set(state, 'inputValue', value);
@@ -15,17 +15,22 @@ export const REMOVE_ITEM = (state, key) => {
 		state.userSettings.currentItem--;
 	}
 	Vue.delete(state.userPlaylist, key);
+	// if(state.userSettings.currentItem === key ) {
+	// 	YTPlayVideo();
+	// }
 }
 
 export const CHANGE_VIDEO = (state, key) => {
 	Vue.set(state.userSettings, 'currentItem', key);
 	Vue.set(state, 'isPlaying', true);
+	YTPlayVideo();
 }
 
 export const PLAY_NEXT_VIDEO = (state) => {
 	const newValue = (state.userSettings.currentItem === state.userPlaylist.length-1) ? 0 : state.userSettings.currentItem + 1;
 	Vue.set(state.userSettings, 'currentItem', newValue);
 	Vue.set(state, 'isPlaying', true);
+	YTPlayVideo();
 }
 
 export const GET_VIDEOS_INFO = (state) => {
@@ -50,7 +55,7 @@ export const GET_VIDEOS_INFO = (state) => {
 				const minutes = (parseInt(match[1]) || 0);
 				const seconds = (parseInt(match[2]) || 0);
 
-				return `${hours !== 0 ? (minutes > 9 ? hours + ':' : hours + ':0') : ''}${minutes}:${seconds !== 0 ? (seconds > 9 ? seconds : '0' + seconds) : ''}`;
+				return `${hours !== 0 ? (minutes > 9 ? hours + ':' : hours + ':0') : ''}${minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
 			}
 			el.duration = YTDurationToSeconds(r.items[0].contentDetails.duration);
 		});

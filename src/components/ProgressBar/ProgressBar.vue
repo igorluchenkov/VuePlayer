@@ -1,12 +1,12 @@
 <template>
   <div class="ProgressBar">
 
+		<div @click="changeVideo('prev')" class="ProgressBar-btn ProgressBar-prev">
+			<img src="@/assets/ProgressBar/next.svg">
+		</div>
 		<div class="ProgressBar-btn" @click="togglePlaying">
 			<img v-if="!isPaused" src="@/assets/ProgressBar/play.svg">
 			<img v-else src="@/assets/ProgressBar/pause.svg">
-		</div>
-		<div @click="changeVideo('prev')" class="ProgressBar-btn ProgressBar-prev">
-			<img src="@/assets/ProgressBar/next.svg">
 		</div>
 		<div @click="changeVideo('next')" class="ProgressBar-btn ProgressBar-next">
 			<img src="@/assets/ProgressBar/next.svg">

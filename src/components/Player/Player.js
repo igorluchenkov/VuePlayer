@@ -1,5 +1,5 @@
 import store from '@/store';
-import YTParser from '../../add_functions/YTParser.js';
+import { YTParser } from '../../add_functions/YTFunctions';
 
 
 export default {
@@ -10,17 +10,6 @@ export default {
     }
   },
   computed: {
-    WatchCurrentVideo(){
-      if(store.state.userPlaylist.length){
-        if(store.state.userSettings.currentItem !== undefined && this.isPlayerReady === true){
-          const currentIndex = store.state.userSettings.currentItem;
-          const currentVideo = store.state.userPlaylist[currentIndex].url;
-    
-          player.loadVideoById(YTParser(currentVideo));
-          player.playVideo();
-        }
-      }
-    },
     arrowLink(){
       return this.$route.path === '/playlist' ? 'player' : 'playlist';
     },
@@ -65,7 +54,11 @@ export default {
     },
     onStateChange: function(data) {
       if(data.data === 0){
-        store.commit('PLAY_NEXT_VIDEO');
+        if(store.state.userSettings.loop === true) {
+          player.playVideo();
+        } else {
+          store.commit('PLAY_NEXT_VIDEO');
+        }
       }
     }
   },
