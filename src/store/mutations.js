@@ -15,14 +15,12 @@ export const REMOVE_ITEM = (state, key) => {
 		state.userSettings.currentItem--;
 	}
 	Vue.delete(state.userPlaylist, key);
-	// if(state.userSettings.currentItem === key ) {
-	// 	YTPlayVideo();
-	// }
 }
 
 export const CHANGE_VIDEO = (state, key) => {
 	Vue.set(state.userSettings, 'currentItem', key);
 	Vue.set(state, 'isPlaying', true);
+	state.currentTime = 0;
 	YTPlayVideo();
 }
 
@@ -30,6 +28,7 @@ export const PLAY_NEXT_VIDEO = (state) => {
 	const newValue = (state.userSettings.currentItem === state.userPlaylist.length-1) ? 0 : state.userSettings.currentItem + 1;
 	Vue.set(state.userSettings, 'currentItem', newValue);
 	Vue.set(state, 'isPlaying', true);
+	state.currentTime = 0;
 	YTPlayVideo();
 }
 
@@ -55,7 +54,8 @@ export const GET_VIDEOS_INFO = (state) => {
 				const minutes = (parseInt(match[1]) || 0);
 				const seconds = (parseInt(match[2]) || 0);
 
-				return `${hours !== 0 ? (minutes > 9 ? hours + ':' : hours + ':0') : ''}${minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
+				return hours*60*60 + minutes * 60 + seconds;
+				// return `${hours !== 0 ? (minutes > 9 ? hours + ':' : hours + ':0') : ''}${minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
 			}
 			el.duration = YTDurationToSeconds(r.items[0].contentDetails.duration);
 		});
@@ -72,4 +72,14 @@ export const TOGGLE_LOOP = (state) => {
 
 export const CHANGE_VOLUME = (state, value) => {
 	Vue.set(state.userSettings, 'volume', Math.abs(100 - value));
+}
+
+export const CHANGE_CURRENT_TIME = (state, value) => {
+	Vue.set(state, 'currentTime', value);
+}
+
+export const INC_CURRENT_TIME = (state) => {
+	if(state.isPlaying === true){
+		Vue.set(state, 'currentTime', parseFloat(state.currentTime) + 0.1);
+	}
 }

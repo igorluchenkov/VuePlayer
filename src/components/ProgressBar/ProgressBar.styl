@@ -15,16 +15,85 @@
 		width 60px
 		height 60px
 		margin-right 15px
-		background #ffc300
+		background #edb600
 		position relative
 		border-radius 6px
 		user-select none
 		transition 0.1s
-		opacity 0.9
 		cursor pointer
+		input[type=range]
+			-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+			width: 100%; /* Specific width is required for Firefox. */
+			background: transparent; /* Otherwise white in Chrome */
+	
+
+		input[type=range]::-webkit-slider-runnable-track 
+			height: 10px;
+			cursor: pointer;
+			animate: 0.2s;
+			background: #ff5733;
+			border-radius: 1.3px;
+		
+		input[type=range]::-webkit-slider-thumb 
+			height: 30px;
+			width: 12px;
+			background: #000;
+			cursor: pointer;
+			-webkit-appearance: none;
+			margin-top: -10px;
+			border-radius: 3px;
+		
+		input[type=range]:focus::-webkit-slider-runnable-track 
+			background: #ff5733;
+		
+		input[type=range]::-moz-range-track 
+			height: 8.4px;
+			cursor: pointer;
+			animate: 0.2s;
+			background: #ff5733;
+			border-radius: 1.3px;
+		
+		input[type=range]::-moz-range-thumb 
+			height: 36px;
+			width: 16px;
+			border-radius: 3px;
+			background: #ffffff;
+			cursor: pointer;
+		
+		input[type=range]::-ms-track 
+			width: 100%;
+			height: 8.4px;
+			cursor: pointer;
+			animate: 0.2s;
+			background: transparent;
+			color: transparent;
+		
+		input[type=range]::-ms-fill-lower 
+			background: #2a6495;
+			border-radius: 2.6px;
+		
+		input[type=range]::-ms-fill-upper 
+			background: #ff5733;
+			border-radius: 2.6px;
+		
+		input[type=range]::-ms-thumb 
+			height: 36px;
+			width: 16px;
+			border-radius: 3px;
+			background: #ffffff;
+			cursor: pointer;
+		
+		input[type=range]:focus::-ms-fill-lower 
+			background: #ff5733;
+		
+		input[type=range]:focus::-ms-fill-upper 
+			background: #ff5733;
+		
 		&:hover
+			background-color #ffc300
 			opacity 1
 		&-looped
+			background-color #ffc300
 			opacity 1
 			img
 				transform translate(-50%, -50%) rotate(180deg) !important
@@ -49,6 +118,7 @@
 			justify-content center	
 		&__volume-active
 			opacity 1
+			background-color #ffc300
 			.ProgressBar-btn__volume
 				opacity 1
 				pointer-events all
@@ -87,7 +157,6 @@
 			width 100%
 			height 5px
 			border-radius 100px
-			overflow hidden
 			background-color #fff
 			margin-top 10px
 			&-current
@@ -96,75 +165,25 @@
 				background-color #ffc300
 				border-radius 100px
 
-
-
-
-
-input[type=range] {
-  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
-  background: transparent; /* Otherwise white in Chrome */
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-  height: 10px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: #ff5733;
-  border-radius: 1.3px;
-}
-input[type=range]::-webkit-slider-thumb {
-  height: 30px;
-  width: 12px;
-  background: #000;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -10px;
-	border-radius: 3px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #ff5733;
-}
-input[type=range]::-moz-range-track {
-  height: 8.4px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: #ff5733;
-  border-radius: 1.3px;
-}
-input[type=range]::-moz-range-thumb {
-  height: 36px;
-  width: 16px;
-  border-radius: 3px;
-  background: #ffffff;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: transparent;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #2a6495;
-  border-radius: 2.6px;
-}
-input[type=range]::-ms-fill-upper {
-  background: #ff5733;
-  border-radius: 2.6px;
-}
-input[type=range]::-ms-thumb {
-  height: 36px;
-  width: 16px;
-  border-radius: 3px;
-  background: #ffffff;
-  cursor: pointer;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #ff5733;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #ff5733;
-}
+		input[type=range]
+			-webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+			width: 100%; /* Specific width is required for Firefox. */
+			background: transparent; /* Otherwise white in Chrome */
+			border-radius 100px
+			overflow hidden
+			&::-webkit-slider-runnable-track
+				height: 10px;
+				cursor: pointer;
+				animate: 0.2s;
+				background: #fff;
+				border-radius 100px
+			&::-webkit-slider-thumb 
+				width: 0px;
+				background: #ffc300;
+				cursor: pointer;
+				-webkit-appearance: none;
+				margin-top: -10px;
+				border-radius: 3px;
+				box-shadow: -100vw 0 0 100vw #ffc300;
+				border-radius 100px
+				overflow hidden

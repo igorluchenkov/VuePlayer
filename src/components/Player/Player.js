@@ -4,11 +4,6 @@ import { YTParser } from '../../add_functions/YTFunctions';
 
 export default {
   name: 'Player',
-  data(){
-    return {
-      isPlayerReady: false,
-    }
-  },
   computed: {
     arrowLink(){
       return this.$route.path === '/playlist' ? 'player' : 'playlist';
@@ -47,15 +42,13 @@ export default {
       const currentVideo = store.state.userPlaylist[currentIndex].url;
 
       player.loadVideoById(YTParser(currentVideo));
-      player.playVideo();
       player.setVolume(store.state.userSettings.volume);
-
-      this.isPlayerReady = true;
     },
     onStateChange: function(data) {
       if(data.data === 0){
         if(store.state.userSettings.loop === true) {
           player.playVideo();
+          store.commit('CHANGE_CURRENT_TIME', 0);
         } else {
           store.commit('PLAY_NEXT_VIDEO');
         }
