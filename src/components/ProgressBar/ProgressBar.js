@@ -19,6 +19,15 @@ export default {
 			const currentVideo = store.state.userPlaylist[currentIndex];
 			return currentVideo.duration === '' ? '' : currentVideo.duration;
 		},
+		formattedCurrentDuration(){
+			return parseInt(this.currentDuration, 10);
+		},
+		currentTime() {
+			return parseInt(store.state.currentTime, 10);
+		},
+		formattedCurrentTime(){
+			return parseInt(store.state.currentTime, 10);
+		},
 	},
 	methods: {
 		togglePlaying(){
@@ -42,18 +51,37 @@ export default {
 			store.commit('TOGGLE_LOOP');
 		},
 		toggleVolumePanel(e){
-			if(e.target.classList.contains('ProgressBar-btn')){
-				e.target.classList.toggle('ProgressBar-btn__volume-active');
+			const cList = e.target.classList;
+
+			if(cList.contains('ProgressBar-btn')){
+				cList.toggle('ProgressBar-btn__volume-active');
+				if(cList.contains('ProgressBar-btn__volume-active')){
+					document.addEventListener('click', function closeVolumeOnClick(e){
+						if(e.target.classList.contains('ProgressBar-btn__volume-active')){
+							document.removeEventListener('click', closeVolumeOnClick);
+						} else {
+							cList.remove('ProgressBar-btn__volume-active');
+							document.removeEventListener('click', closeVolumeOnClick);
+						}
+					})
+				}
 			}
 		},
 		changeVolume(e){
 			store.commit('CHANGE_VOLUME', e.target.value);
 			player.setVolume(store.state.userSettings.volume);
 		},
+		changeCurrentTime(e){
+			store.commit('CHANGE_CURRENT_TIME', e.target.value)
+			player.seekTo(store.state.currentTime);
+		}
 	},
 	data(){
 		return {
-			currentVolume: Math.abs(100 - store.state.userSettings.volume)
+			currentVolume: Math.abs(100 - store.state.userSettings.volume),
+			interval: setInterval(function(){
+				store.commit('INC_CURRENT_TIME');
+			}, 100)
 		}
 	}
 }
