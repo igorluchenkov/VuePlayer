@@ -13,3 +13,16 @@ export const YTPlayVideo = function(){
 	player.loadVideoById(YTParser(currentVideo));
 	player.playVideo();
 }
+
+export const YTDurationToSeconds = function(duration) {
+	let match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+
+	match = match.slice(1).map(x => (x != null) ? x.replace(/\D/, '') : '');
+
+	const hours = (parseInt(match[0]) || 0);
+	const minutes = (parseInt(match[1]) || 0);
+	const seconds = (parseInt(match[2]) || 0);
+
+	return hours*60*60 + minutes * 60 + seconds;
+	// return `${hours !== 0 ? (minutes > 9 ? hours + ':' : hours + ':0') : ''}${minutes}:${seconds > 9 ? seconds : '0' + seconds}`;
+}
