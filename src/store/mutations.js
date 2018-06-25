@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { YTParser, YTPlayVideo, YTDurationToSeconds } from '../add_functions/YTFunctions.js';
+import { YTGetData } from '../api/youtube.js';
 
 export const UPDATE_INPUT = (state, value) => {
 	Vue.set(state, 'inputValue', value);
@@ -37,8 +38,7 @@ export const GET_VIDEOS_INFO = (state) => {
 	namelessItems.map(el => {
 		const id = YTParser(el.url);
 
-		fetch(`https://www.googleapis.com/youtube/v3/videos?id=${id}&key=AIzaSyDlLL_DAscuOKLMq6XhLp8hKP6TTSTcjhA&part=snippet,contentDetails`)
-		.then(r => r.json())
+		YTGetData(id)
 		.then(r => {
 			el.name = r.items[0].snippet.title;
 			el.duration = YTDurationToSeconds(r.items[0].contentDetails.duration);
@@ -64,6 +64,6 @@ export const CHANGE_CURRENT_TIME = (state, value) => {
 
 export const INC_CURRENT_TIME = (state) => {
 	if(state.isPlaying === true){
-		Vue.set(state, 'currentTime', parseFloat(state.currentTime) + 0.1);
+		Vue.set(state, 'currentTime', parseFloat(state.currentTime) + 0.5);
 	}
 }

@@ -10,7 +10,6 @@ export default {
     },
   },
   mounted: function(){
-    const context = this;
     const tag = document.createElement('script');
 
     tag.src = "https://www.youtube.com/iframe_api";
@@ -18,7 +17,7 @@ export default {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     
     window.player = player;
-    window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
+    window.onYouTubeIframeAPIReady = () => {
       player = new YT.Player('player', {
         width: '1228',
         height: '693',
@@ -30,18 +29,15 @@ export default {
           disablekb:1,
         },
         events: {
-          'onReady': context.onPlayerReady,
-          'onStateChange': context.onStateChange,
+          'onReady': this.onPlayerReady,
+          'onStateChange': this.onStateChange,
         }
       });
     }
   }, 
   methods: {
     onPlayerReady: function() {
-      const currentIndex = store.state.userSettings.currentItem;
-      const currentVideo = store.state.userPlaylist[currentIndex].url;
-
-      player.loadVideoById(YTParser(currentVideo));
+      player.loadVideoById(YTParser(store.getters.currentVideo.url));
       player.setVolume(store.state.userSettings.volume);
     },
     onStateChange: function(data) {

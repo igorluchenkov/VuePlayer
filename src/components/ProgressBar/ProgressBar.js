@@ -10,14 +10,10 @@ export default {
 			return store.state.userSettings.loop
 		},
 		currentTitle() {
-			const currentIndex = store.state.userSettings.currentItem;
-			const currentVideo = store.state.userPlaylist[currentIndex];
-			return currentVideo.name === '' ? currentVideo.url : currentVideo.name;
+			return store.getters.currentVideo.name === '' ? store.getters.currentVideo.url : store.getters.currentVideo.name;
 		},
 		currentDuration() {
-			const currentIndex = store.state.userSettings.currentItem;
-			const currentVideo = store.state.userPlaylist[currentIndex];
-			return currentVideo.duration === '' ? '' : currentVideo.duration;
+			return store.getters.currentVideo.duration;
 		},
 		formattedCurrentDuration(){
 			return parseInt(this.currentDuration, 10);
@@ -41,7 +37,7 @@ export default {
 		changeVideo(direction){
 			let current = store.state.userSettings.currentItem;
 			if(direction === 'prev') {
-				current = current - 1 === -1 ? store.state.userPlaylist.length - 1 : current - 1;
+				current = current === 0 ? store.state.userPlaylist.length - 1 : current - 1;
 			} else {
 				current = current + 1 === store.state.userPlaylist.length ? 0 : current + 1;
 			}
@@ -81,7 +77,7 @@ export default {
 			currentVolume: Math.abs(100 - store.state.userSettings.volume),
 			interval: setInterval(function(){
 				store.commit('INC_CURRENT_TIME');
-			}, 100)
+			}, 500)
 		}
 	}
 }

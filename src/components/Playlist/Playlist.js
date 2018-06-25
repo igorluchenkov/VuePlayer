@@ -5,7 +5,7 @@ export default {
 	name: 'Playlist',
 	computed: {
 		userPlaylist() {
-			return (this.$store.state.userPlaylist ? store.state.userPlaylist : false);
+			return (store.state.userPlaylist ? store.state.userPlaylist : false);
 		},
 		inputValue: {
 			get() {
